@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+<html ng-app="githubViewer" ng-controller="MainController">
+
+<head>
+  <script src="angular.js"></script>
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js"></script>
+  <style>
+    body {
+      background-color: pink;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1 align="center">{{message}}</h1>
+  <div>
+    {{ error }}
+  </div>
+  <div align="center" ng-hide="user">
+    <font size="5" color="red"> <strong>Timer:</strong> <br /></font>
+    <font size="5" color="black"><strong>{{countdown}}</strong></font>
+  </div>
+
+  <form name="searchUser" ng-submit="search(username)">
+    <div align="center">
+      <br />
+      <input type="search" required placeholder="Username to find" ng-model="username" />
+      <input type="submit" value="Search" ng-click="search(username)">
+    </div>
+  </form>
+
+  <div ng-show="user" align="center">
+    <div>Name : {{user.name}} </div>
+
+    <div>Location: {{user.location}}</div>
+
+    <div>Followers: {{user.followers}}</div>
+
+    <img ng-src="{{user.avatar_url}}" title="{{user.name}}">
+
+    <table border="5" cellspacing="2" cellpadding="3">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Stars</th>
+          <th>Language</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="repo in repos">
+          <td><strong>{{repo.name}}</strong></td>
+          <td>{{repo.stargazers_count | number}}</td>
+          <td>{{repo.language}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+
+</html>
